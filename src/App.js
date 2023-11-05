@@ -1,33 +1,32 @@
 import "./App.css";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-
-
 
 function App() {
   const [isGreen, setIsGreen] = useState(false);
   const [isBttnPressed, setIsBttnPressed] = useState(false);
   const [joke, setJoke] = useState('')
+  const api_key = process.env.REACT_APP_RAPID_API_KEY;
 
-  const generateJoke = async () => {
+
+  const generateJoke = useCallback(async () => {
     try {
       const options = {
         method: 'GET',
         url: 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random',
         headers: {
           accept: 'application/json',
-          'X-RapidAPI-Key': '713e8fb8a1msh50b6b23ef7590f1p182f18jsn9f27399ff9ff',
-          'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
-        }
+          'X-RapidAPI-Key': api_key,
+          'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com',
+        },
       };
-
+  
       const response = await axios.request(options);
-
       setJoke(response.data.value);
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [api_key]);
 
   useEffect(() => {
     if(isBttnPressed){
@@ -38,7 +37,7 @@ function App() {
       },100)
       
     }
-  }, [isBttnPressed]);
+  }, [isBttnPressed, generateJoke]);
 
   const toggleColor = () => {
     setIsGreen(true);
