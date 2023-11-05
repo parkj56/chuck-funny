@@ -1,0 +1,38 @@
+.Outer-Container{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    background-image: url(../src/img/chucknorris.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.Bttn-Content{
+    margin-top: 20em;
+    position: absolute;
+    text-align: center; 
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+    background-color: black;
+    padding: 1em;
+    word-wrap: break-word;
+
+}
+
+@media (max-width: 768px) {
+    .Outer-Container {
+        background-size: cover;
+        background-position: center; /* Center the background image in small screens */
+        align-items: center;
+    }
+    .Bttn-Content {
+        padding: .5em 2em;
+        word-wrap: break-word;
+    }
+    
+  }
+
+
+
